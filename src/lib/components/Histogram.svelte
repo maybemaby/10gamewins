@@ -6,7 +6,7 @@
 		data,
 		title,
 		width = 800,
-		height = 300,
+		height = 400,
 		...rest
 	}: HTMLAttributes<HTMLDivElement> & {
 		data: Plot.Data;

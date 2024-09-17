@@ -9,11 +9,15 @@
 		lineY,
 		title,
 		class: classname,
+		height = 400,
+		width = 800,
 		...rest
 	}: {
 		data: Plot.Data;
 		lineY?: boolean;
 		title?: string;
+		height?: number;
+		width?: number;
 	} & HTMLAttributes<HTMLDivElement> = $props();
 
 	let el: HTMLDivElement;
@@ -25,8 +29,8 @@
 			el.append(
 				Plot.lineY(data).plot({
 					grid: true,
-					width: 800,
-					height: 300,
+					width,
+					height,
 					y: {
 						ticks: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 					}
