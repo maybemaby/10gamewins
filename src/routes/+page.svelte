@@ -6,6 +6,9 @@
 	import LucidePlay from '~icons/lucide/play';
 	import LucidePause from '~icons/lucide/pause';
 	import LucideRefreshCcw from '~icons/lucide/refresh-ccw';
+	import { cn } from '$lib/utils';
+	import Runner from '$lib/components/Runner.svelte';
+	import LineChart from '$lib/components/LineChart.svelte';
 
 	let games: Game[] = $state([
 		{
@@ -70,8 +73,15 @@
 	{/each}
 </section>
 
-<div class="flex items-center gap-3">
-	<Button class="w-[150px] gap-2 px-6 text-lg" onclick={toggleSim}>
+<div class="mb-5 flex flex-wrap items-center justify-center gap-3">
+	<Button
+		class={cn(
+			'w-[150px] gap-2 px-6 text-lg hover:bg-green-600',
+			// sim.isRunning && 'bg-green-600',
+			sim.isRunning && 'hover:bg-red-600'
+		)}
+		onclick={toggleSim}
+	>
 		{#if sim.isRunning}
 			<LucidePause /> Pause
 		{:else}
@@ -81,8 +91,16 @@
 	<Button class="gap-2" variant="ghost" onclick={sim.reset}>
 		<LucideRefreshCcw /> Reset
 	</Button>
+
+	<span class="flex items-center gap-2 sm:ml-4">
+		<p>Speed:</p>
+		<Button onclick={() => sim.setSpeed(1)} variant="outline">1x</Button>
+		<Button onclick={() => sim.setSpeed(2)} variant="outline">2x</Button>
+		<Button onclick={() => sim.setSpeed(5)} variant="outline">5x</Button>
+		<Button onclick={() => sim.setSpeed(10)} variant="outline">10x</Button>
+	</span>
 </div>
 
-<p>{sim.runNumber}</p>
-<p>Streak: {sim.currentStreak}</p>
+<Runner initMax={100} run={sim.runNumber} />
 <p>Longest Streak: {sim.maxWins}</p>
+<LineChart data={sim.streakHistory} lineY title="Run History" />

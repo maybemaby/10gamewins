@@ -10,15 +10,22 @@
 </script>
 
 <div
-	class="flex w-1/2 min-w-[300px] max-w-[700px] items-center justify-between gap-6 rounded-md border-[1px] px-4 py-3"
+	class="flex w-1/2 min-w-[300px] max-w-[700px] items-center gap-6 rounded-md border-[1px] px-4 py-3 md:justify-between"
 >
 	<input
 		type="text"
 		class="rounded-sm border-none px-1 py-2 outline-none focus-within:bg-gray-50 hover:bg-gray-50"
 		bind:value={name}
 	/>
-	<div class="flex w-[150px] flex-col gap-2">
+	<div class="flex w-[170px] flex-col gap-2">
 		<label for="win-rate">Win Rate: {winRate}%</label>
-		<Slider id="win-rate" max={100} min={0} step={0.5} bind:value={winRate} onValueChange={onRateChange} />
+		<Slider
+			id="win-rate"
+			max={100}
+			min={0}
+			step={0.5}
+			bind:value={winRate}
+			onValueChange={onRateChange}
+		/>
 	</div>
 </div>
