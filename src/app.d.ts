@@ -1,3 +1,4 @@
+import 'unplugin-icons/types/svelte.d.ts';
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 declare global {

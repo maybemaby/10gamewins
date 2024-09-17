@@ -1,8 +1,13 @@
-<script>
+<script lang="ts">
 	import GameInput from '$lib/components/GameInput.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
+	import type { Game } from '$lib';
+	import { createSimState } from '$lib/sim.svelte';
+	import LucidePlay from '~icons/lucide/play';
+	import LucidePause from '~icons/lucide/pause';
+	import LucideRefreshCcw from '~icons/lucide/refresh-ccw';
 
-	let games = $state([
+	let games: Game[] = $state([
 		{
 			name: 'Game 1',
 			winRate: 50
@@ -44,6 +49,16 @@
 			winRate: 50
 		}
 	]);
+
+	let sim = createSimState(games);
+
+	function toggleSim() {
+		if (sim.isRunning) {
+			sim.pause();
+		} else {
+			sim.run();
+		}
+	}
 </script>
 
 <h1 class="text-2xl font-semibold">10gamewins</h1>
@@ -55,6 +70,19 @@
 	{/each}
 </section>
 
-<Button class="px-6 text-lg">Start</Button>
+<div class="flex items-center gap-3">
+	<Button class="w-[150px] gap-2 px-6 text-lg" onclick={toggleSim}>
+		{#if sim.isRunning}
+			<LucidePause /> Pause
+		{:else}
+			<LucidePlay /> Start
+		{/if}
+	</Button>
+	<Button class="gap-2" variant="ghost" onclick={sim.reset}>
+		<LucideRefreshCcw /> Reset
+	</Button>
+</div>
 
-<!-- {JSON.stringify(games)} -->
+<p>{sim.runNumber}</p>
+<p>Streak: {sim.currentStreak}</p>
+<p>Longest Streak: {sim.maxWins}</p>
