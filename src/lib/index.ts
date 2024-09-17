@@ -1,6 +1,6 @@
 export interface Game {
-  name: string;
-  winRate: number;
+	name: string;
+	winRate: number;
 }
 
 export function win(winRate: number): boolean {

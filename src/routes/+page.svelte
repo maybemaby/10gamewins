@@ -9,6 +9,7 @@
 	import { cn } from '$lib/utils';
 	import Runner from '$lib/components/Runner.svelte';
 	import LineChart from '$lib/components/LineChart.svelte';
+	import Histogram from '$lib/components/Histogram.svelte';
 
 	let games: Game[] = $state([
 		{
@@ -103,4 +104,5 @@
 
 <Runner initMax={100} run={sim.runNumber} />
 <p>Longest Streak: {sim.maxWins}</p>
-<LineChart data={sim.streakHistory} lineY title="Run History" />
+<LineChart class="my-3" data={sim.streakHistory} lineY title="Run History" />
+<Histogram title="Streak Distribution" data={sim.streakHistory} />
