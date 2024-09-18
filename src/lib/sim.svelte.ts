@@ -11,6 +11,7 @@ export function createSimState(games: Game[]) {
 	let currentGameIdx = $state(0);
 	let interval = $state<number | null>(null);
 	let streakHistory = $state<number[]>([0]);
+	let won = $state(false);
 
 	function setSpeed(newSpeed: number) {
 		speed = newSpeed;
@@ -27,6 +28,7 @@ export function createSimState(games: Game[]) {
 			if (currentGameIdx == games.length) {
 				pause();
 				streakHistory.push(currentStreak);
+				won = true;
 			}
 
 			let game = games[currentGameIdx];
@@ -57,6 +59,7 @@ export function createSimState(games: Game[]) {
 		currentStreak = 0;
 		currentGameIdx = 0;
 		streakHistory = [0];
+		won = false;
 	}
 
 	return {
@@ -74,6 +77,9 @@ export function createSimState(games: Game[]) {
 		},
 		get streakHistory() {
 			return streakHistory;
+		},
+		get won() {
+			return won;
 		},
 		run,
 		pause,

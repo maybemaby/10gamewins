@@ -10,7 +10,7 @@
 </script>
 
 <div
-	class="flex w-1/2 min-w-[300px] max-w-[700px] flex-col items-center gap-6 rounded-md border-[1px] px-4 py-3 md:flex-row md:justify-between"
+	class="flex w-1/2 min-w-[300px] max-w-[700px] flex-col items-center gap-6 rounded-md border-[1px] px-4 py-3 md:flex-row md:justify-between xl:w-full"
 >
 	<input
 		type="text"

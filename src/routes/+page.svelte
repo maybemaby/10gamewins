@@ -68,7 +68,10 @@
 <h1 class="text-2xl font-semibold">10gamewins</h1>
 <p class="prose my-3 text-lg">Simulate 10 game wins in a row.</p>
 
-<section id="games" class="my-10 flex w-full flex-col items-center gap-3">
+<section
+	id="games"
+	class="my-10 flex w-full grid-cols-2 flex-col items-center gap-3 xl:grid xl:max-w-screen-xl xl:justify-items-center"
+>
 	{#each games as game, idx (idx)}
 		<GameInput bind:name={game.name} onRateChange={(r) => (game.winRate = r[0])} />
 	{/each}
