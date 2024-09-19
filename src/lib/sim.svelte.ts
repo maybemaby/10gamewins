@@ -46,7 +46,7 @@ export function createSimState(games: Game[]) {
 			}
 
 			totalDuration[game.name] = (totalDuration[game.name] || 0) + game.durationMinutes;
-		}, 200 / speed);
+		}, 180 / speed);
 	}
 
 	function pause() {

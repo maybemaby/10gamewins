@@ -129,7 +129,7 @@
 <Runner initMax={100} run={sim.runNumber} />
 <p>Longest Streak: {sim.maxWins}</p>
 <p>
-	Total Duration: {`${sim.totalDuration.hours}:${sim.totalDuration.minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 })}`}
+	Total Duration: {`${sim.totalDuration.hours}h:${sim.totalDuration.minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 })}m`}
 </p>
 <div class="my-5 flex grid-cols-2 flex-col gap-2 xl:grid">
 	<LineChart data={sim.streakHistory} lineY title="Run History" />
