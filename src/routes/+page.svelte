@@ -10,47 +10,58 @@
 	import Runner from '$lib/components/Runner.svelte';
 	import LineChart from '$lib/components/LineChart.svelte';
 	import Histogram from '$lib/components/Histogram.svelte';
+	import BarChart from '$lib/components/BarChart.svelte';
 
 	let games: Game[] = $state([
 		{
 			name: 'Game 1',
-			winRate: 50
+			winRate: 50,
+			durationMinutes: 5
 		},
 		{
 			name: 'Game 2',
-			winRate: 50
+			winRate: 50,
+			durationMinutes: 5
 		},
 		{
 			name: 'Game 3',
-			winRate: 50
+			winRate: 50,
+			durationMinutes: 5
 		},
 		{
 			name: 'Game 4',
-			winRate: 50
+			winRate: 50,
+			durationMinutes: 5
 		},
 		{
 			name: 'Game 5',
-			winRate: 50
+			winRate: 50,
+			durationMinutes: 5
 		},
 		{
 			name: 'Game 6',
-			winRate: 50
+			winRate: 50,
+			durationMinutes: 5
 		},
 		{
 			name: 'Game 7',
-			winRate: 50
+			winRate: 50,
+			durationMinutes: 5
 		},
 		{
 			name: 'Game 8',
-			winRate: 50
+			winRate: 50,
+			durationMinutes: 5
 		},
 		{
 			name: 'Game 9',
-			winRate: 50
+			winRate: 50,
+			durationMinutes: 5
 		},
 		{
 			name: 'Game 10',
-			winRate: 50
+			winRate: 50,
+			durationMinutes: 5
 		}
 	]);
 
@@ -63,6 +74,10 @@
 			sim.run();
 		}
 	}
+
+	let flattenedDurationPerGame = $derived.by(() => {
+		return Object.entries(sim.durationPerGame).map(([game, duration]) => ({ game, duration }));
+	});
 </script>
 
 <h1 class="text-2xl font-semibold">10gamewins</h1>
@@ -73,7 +88,12 @@
 	class="my-10 flex w-full grid-cols-2 flex-col items-center gap-3 xl:grid xl:max-w-screen-xl xl:justify-items-center"
 >
 	{#each games as game, idx (idx)}
-		<GameInput bind:name={game.name} onRateChange={(r) => (game.winRate = r[0])} />
+		<GameInput
+			bind:name={game.name}
+			onRateChange={(r) => (game.winRate = r[0])}
+			durationMinutes={game.durationMinutes}
+			onDurationChange={(d) => (game.durationMinutes = d)}
+		/>
 	{/each}
 </section>
 
@@ -107,5 +127,11 @@
 
 <Runner initMax={100} run={sim.runNumber} />
 <p>Longest Streak: {sim.maxWins}</p>
-<LineChart class="my-3" data={sim.streakHistory} lineY title="Run History" />
-<Histogram title="Streak Distribution" data={sim.streakHistory} />
+<p>
+	Total Duration: {`${sim.totalDuration.hours}:${sim.totalDuration.minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 })}`}
+</p>
+<div class="my-5 flex grid-cols-2 flex-col gap-2 xl:grid">
+	<LineChart data={sim.streakHistory} lineY title="Run History" />
+	<Histogram title="Streak Distribution" data={sim.streakHistory} />
+	<BarChart title={'Duration Per Game'} data={flattenedDurationPerGame} x="duration" y="game" />
+</div>

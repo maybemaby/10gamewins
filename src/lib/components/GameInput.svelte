@@ -1,16 +1,24 @@
 <script lang="ts">
+	import DurationPicker from './DurationPicker.svelte';
 	import Slider from './ui/slider/slider.svelte';
 
 	let {
 		name = $bindable(),
+		durationMinutes = $bindable(),
+		onDurationChange,
 		onRateChange
-	}: { name: string; onRateChange: (rate: number[]) => void } = $props();
+	}: {
+		name: string;
+		onRateChange: (rate: number[]) => void;
+		durationMinutes: number;
+		onDurationChange: (duration: number) => void;
+	} = $props();
 
 	let winRate = $state([50]);
 </script>
 
 <div
-	class="flex w-1/2 min-w-[300px] max-w-[700px] flex-col items-center gap-6 rounded-md border-[1px] px-4 py-3 md:flex-row md:justify-between xl:w-full"
+	class="flex w-3/4 min-w-[300px] max-w-[1000px] flex-col items-center gap-6 rounded-md border-[1px] px-4 py-3 md:flex-row md:justify-between xl:w-full"
 >
 	<input
 		type="text"
@@ -27,5 +35,9 @@
 			bind:value={winRate}
 			onValueChange={onRateChange}
 		/>
+	</div>
+	<div class="flex flex-col gap-2">
+		<p>Time Taken</p>
+		<DurationPicker {durationMinutes} {onDurationChange} />
 	</div>
 </div>

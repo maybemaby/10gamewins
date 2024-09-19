@@ -12,6 +12,7 @@ export function createSimState(games: Game[]) {
 	let interval = $state<number | null>(null);
 	let streakHistory = $state<number[]>([0]);
 	let won = $state(false);
+	let totalDuration = $state<Record<string, number>>({});
 
 	function setSpeed(newSpeed: number) {
 		speed = newSpeed;
@@ -43,6 +44,8 @@ export function createSimState(games: Game[]) {
 				currentGameIdx = 0;
 				runNumber++;
 			}
+
+			totalDuration[game.name] = (totalDuration[game.name] || 0) + game.durationMinutes;
 		}, 200 / speed);
 	}
 
@@ -60,6 +63,7 @@ export function createSimState(games: Game[]) {
 		currentGameIdx = 0;
 		streakHistory = [0];
 		won = false;
+		totalDuration = {};
 	}
 
 	return {
@@ -80,6 +84,17 @@ export function createSimState(games: Game[]) {
 		},
 		get won() {
 			return won;
+		},
+		get totalDuration() {
+			const total = Object.values(totalDuration).reduce((acc, val) => acc + val, 0);
+
+			return {
+				hours: Math.floor(total / 60),
+				minutes: total % 60
+			};
+		},
+		get durationPerGame() {
+			return totalDuration;
 		},
 		run,
 		pause,
