@@ -35,7 +35,7 @@
 				y: {
 					label: ''
 				},
-				marginLeft: 60,
+				marginLeft: 130,
 				marginTop: 40,
 
 				marks: [
