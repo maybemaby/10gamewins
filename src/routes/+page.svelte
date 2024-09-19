@@ -89,6 +89,7 @@
 >
 	{#each games as game, idx (idx)}
 		<GameInput
+			order={idx + 1}
 			bind:name={game.name}
 			onRateChange={(r) => (game.winRate = r[0])}
 			durationMinutes={game.durationMinutes}
