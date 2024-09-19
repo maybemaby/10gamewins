@@ -81,7 +81,13 @@
 </script>
 
 <h1 class="text-2xl font-semibold">10gamewins</h1>
-<p class="prose my-3 text-lg">Simulate 10 game wins in a row.</p>
+<p class="prose my-3 text-center text-lg">
+	Simulate 10 game wins in a row. Inspired by <a
+		class="text-blue-500"
+		href="https://www.youtube.com/@ludwig"
+		target="_blank">Ludwig's</a
+	> God Gamer Challenge.
+</p>
 
 <section
 	id="games"

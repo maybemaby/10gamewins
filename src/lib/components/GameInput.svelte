@@ -20,7 +20,7 @@
 </script>
 
 <div
-	class="flex w-3/4 min-w-[300px] max-w-[1000px] flex-col items-center gap-6 rounded-md border-[1px] px-4 py-3 md:flex-row md:justify-between xl:w-full"
+	class="flex w-11/12 min-w-[300px] max-w-[1000px] flex-col gap-x-6 gap-y-4 rounded-md border-[1px] px-4 py-3 sm:w-3/4 md:flex-row md:items-center md:justify-between xl:w-full"
 >
 	<span>
 		{order}.

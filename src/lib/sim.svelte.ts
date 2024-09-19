@@ -30,6 +30,7 @@ export function createSimState(games: Game[]) {
 				pause();
 				streakHistory.push(currentStreak);
 				won = true;
+				return;
 			}
 
 			let game = games[currentGameIdx];
